@@ -115,4 +115,4 @@ fig3d.update_layout(
     height=600
 )
 
-fig3d.show()
+fig3d.show(renderer="browser")
