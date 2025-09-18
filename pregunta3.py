@@ -51,28 +51,40 @@ fig3d = go.Figure()
 # Señal en el tiempo
 fig3d.add_trace(go.Scatter3d(
     x=t, y=np.zeros_like(t), z=x_t,
-    mode='lines', line=dict(color='darkmagenta', width=5),
+    mode='lines', line=dict(color='darkmagenta', width=10),
     name='Señal en tiempo'
 ))
 
 # Señales separadas
 lista_senos = [x_t_1,x_t_2,x_t_3,x_t_4]
 lista_n_freq = [3,7,11,17]
+lista_colores =['#008000','#009900','#00ba00','#00f300']
+lista_nombres =["Sen(2π⋅3t)","(1/5)Sen(2π⋅7t)","(3/10)Sen(2π⋅11t)","(1/5)Sen(2π⋅17t)"]
+
+
 for i in range(4):
-    fig3d.add_trace(go.Scatter3d(x=t, y=np.full_like(t, lista_n_freq[i]), z=lista_senos[i], mode='lines', line=dict(color='red', width=1)))
-    fig3d.add_trace(go.Scatter3d(x=t, y=np.full_like(t, -1*lista_n_freq[i]), z=lista_senos[i], mode='lines', line=dict(color='red', width=1)))
+    fig3d.add_trace(go.Scatter3d(
+        x=t, y=np.full_like(t, lista_n_freq[i]), z=lista_senos[i],
+        mode='lines', line=dict(color=lista_colores[i],width=5),
+        name=lista_nombres[i]
+    ))
+    fig3d.add_trace(go.Scatter3d(
+        x=t, y=np.full_like(t, -1*lista_n_freq[i]), z=lista_senos[i],
+        mode='lines', line=dict(color=lista_colores[i], width=5),
+        showlegend=False
+    ))
 
 # Espectro de la señal
 fig3d.add_trace(go.Scatter3d(
     x=np.zeros_like(freqs), y=freqs, z=X_mag,
-    mode='lines', line=dict(color='steelblue', width=5),
+    mode='lines', line=dict(color='steelblue', width=10),
     name='Espectro FFT'
 ))
 
 # Linea x
 fig3d.add_trace(go.Scatter3d(
     x=[0, 2], y=[0, 0], z=[0, 0],
-    mode='lines', line=dict(color='black', width=4),
+    mode='lines', line=dict(color='black', width=10),
     showlegend=False
 ))
 
